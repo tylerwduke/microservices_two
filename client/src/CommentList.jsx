@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const CommentList = ({ postId }) => {
-    const [comments, setComments] = useState({});
+    const [comments, setComments] = useState([]);
 
     const fetchComments = async () => {
         const res = await axios.get(`http://localhost:4001/posts/${postId}/comments`);
@@ -14,17 +14,16 @@ const CommentList = ({ postId }) => {
         fetchComments();
     }, [])
 
-    const renderedComments = Object.values(comments).map(comment => {
-        return (
-            <div key={comment.id} className="card" style={{ width: '100%', marginBottom: '20px' }}>
-                <div className="card-body">
-                    <h3>{comment.content}</h3>
-                </div>
-            </div>
-        )
+    const renderedComments = comments.map(comment => {
+        return <li key={comment.id}>{ comment.content }</li>
     })
 
-    return <p>{renderedComments}</p>
+    return (
+        <div>
+            <p>{comments.length} comments</p>
+            <ul>{renderedComments}</ul>
+        </div>
+    )
 }
 
 export default CommentList;

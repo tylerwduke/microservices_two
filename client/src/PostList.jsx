@@ -18,12 +18,14 @@ const PostList = () => {
 
     const renderedPosts = Object.values(posts).map(post => {
         return (
-             <div key={post.id} className="card" style={{ width: '30%', marginBottom: '20px' }}>
+             <div key={post.id} className="card" style={{ display: 'flex', justifyContent: 'center', width: '30%', marginBottom: '20px' }}>
                 <div className="card-body">
                     <h3>{post.title}</h3>
                     <CommentCreate postId={post.id} />
                 </div>
-                <CommentList postId={post.id} />
+                <div style={{ display: 'flex', justifyContent:'center' }}>
+                    <CommentList postId={post.id} />
+                </div>
              </div>
         )
     })
